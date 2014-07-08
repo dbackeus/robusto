@@ -1,9 +1,19 @@
 <template name="meetingsIndex">
-  <ul class="meetings">
+  <h1>Meetings</h1>
+  <ul class="list-group">
     {{#each meetings}}
-      <li>
+      <li class="list-group-item">
         <a href="{{pathFor 'meetingsShow'}}">{{title}}</a>
+        <button class="delete-meeting btn btn-danger btn-xs" style="float:right">Delete</button>
       </li>
     {{/each}}
   </ul>
+  <h2>New Meeting</h2>
+  <form class="form-inline">
+    <div class="form-group">
+      <label for="meeting-title">Title:</label>
+      <input id="meeting-title" name="meeting-title" class="form-control" type="text">
+    </div>
+    <button id="create" class="btn btn-primary">Create</button>
+  </form>
 </template>

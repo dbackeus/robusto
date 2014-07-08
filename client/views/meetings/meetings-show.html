@@ -1,9 +1,16 @@
 <template name="meetingsShow">
   <h2>{{title}}</h2>
-  {{asdf}}
+
+  {{#if participating}}
+  {{else}}
+    <button id="join" class="btn btn-default">Join</button>
+  {{/if}}
+
   {{#each participations}}
     {{> participation}}
   {{/each}}
+
+  <button id="reset" class="btn btn-warning">Reset</button>
 </template>
 
 <template name="participation">
@@ -12,10 +19,12 @@
     {{#if currentUser}}
       <p>
         Vote:
-
+        <div class="btn-group">
         {{#each fibonacci}}
-          <a href="#" data-points={{this}}>{{this}}</a>
+          <button class="btn btn-default" data-points={{this}}>{{this}}</button>
         {{/each}}
+        </div>
+        <button class="btn btn-warning" id="leave">Leave</button>
       </p>
     {{/if}}
   </div>
