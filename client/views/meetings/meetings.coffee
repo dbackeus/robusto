@@ -39,6 +39,9 @@ Template.meetingsShow.helpers
     else
       ""
 
+  loggedIn: ->
+    Meteor.userId()
+
 Template.meetingsShow.events
   "click #join": (e) ->
     Participations.insert({meeting_id: @_id, user_id: Meteor.userId()})

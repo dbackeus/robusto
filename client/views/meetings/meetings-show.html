@@ -13,7 +13,9 @@
       {{/each}}
       </div>
     {{else}}
-      <button id="join" class="btn btn-default">Join</button>
+      {{#if currentUser}}
+        <button id="join" class="btn btn-default">Join</button>
+      {{/if}}
     {{/if}}
 
     <div style="margin-top: 40px; margin-bottom: 40px;">
