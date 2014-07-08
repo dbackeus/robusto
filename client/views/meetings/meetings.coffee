@@ -23,6 +23,22 @@ Template.meetingsShow.helpers
   fibonacci: ->
     [0,1,2,3,5,8,13,"?"]
 
+  flipped: ->
+    console.log("flipped")
+    participations = Participations.find({meeting_id: @_id}).fetch()
+
+    if _.all(participations, (participation) -> participation.points?)
+      ""
+    else
+      "flipped"
+
+  pointActiveClass: (number) ->
+    participation = Participations.findOne({meeting_id: @_id, user_id: Meteor.userId()})
+    if participation? && participation.points == number
+      "active"
+    else
+      ""
+
 Template.meetingsShow.events
   "click #join": (e) ->
     Participations.insert({meeting_id: @_id, user_id: Meteor.userId()})
@@ -31,10 +47,9 @@ Template.meetingsShow.events
     Participations.find(meeting_id: @_id).forEach (participation) ->
       Participations.update(participation._id, $set: {points: null})
 
-  "click [data-points]": (e) ->
-    $link = $(e.target)
-    points = $link.data("points")
-    meetingId = $link.closest("[data-id]").data("id")
+  "click .btn-vote": (e, template) ->
+    points = $(e.target).html()
+    meetingId = template.data._id
     participationId = Participations.findOne(meeting_id: meetingId, user_id: Meteor.userId())._id
     Participations.update(participationId, $set: {points: points})
 
@@ -43,22 +58,18 @@ Template.meetingsShow.events
     Participations.remove(participationId)
 
 Template.participation.helpers
+  flipped: ->
+    participations = Participations.find({meeting_id: @meeting_id}).fetch()
+    ownParticipationWithVote = @points? && @user_id == Meteor.userId()
+    everyoneVoted = _.all(participations, (participation) -> participation.points?)
+    "flipped" unless ownParticipationWithVote || everyoneVoted
+
   name: ->
     user = Meteor.users.findOne(@user_id)
-    if user
-      user.profile.name
-    else
-      ""
+    user.profile.name if user
 
-  points: ->
-    participations = Participations.find(meeting_id: @meeting_id).fetch()
-    everyoneVoted = _.all(participations, (participation) -> participation.points?)
-
+  state: ->
     if @points?
-      if everyoneVoted
-        @points
-      else
-        "voted"
+      "Voted"
     else
-      "pending"
-
+      "Pending"
