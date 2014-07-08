@@ -1,31 +1,29 @@
 <template name="meetingsShow">
-  <h2>{{title}}</h2>
+  <div class="meeting" data-id="{{_id}}">
+    <h2>{{title}}</h2>
 
-  {{#if participating}}
-  {{else}}
-    <button id="join" class="btn btn-default">Join</button>
-  {{/if}}
+    {{#if participating}}
+      <button class="btn btn-warning" id="leave">Leave</button>
+      <label>Vote:</label>
+      <div class="btn-group">
+      {{#each fibonacci}}
+        <button class="btn btn-default" data-points="{{this}}">{{this}}</button>
+      {{/each}}
+      </div>
+    {{else}}
+      <button id="join" class="btn btn-default">Join</button>
+    {{/if}}
 
-  {{#each participations}}
-    {{> participation}}
-  {{/each}}
+    {{#each participations}}
+      {{> participation}}
+    {{/each}}
 
-  <button id="reset" class="btn btn-warning">Reset</button>
+    <button id="reset" class="btn btn-warning">Reset</button>
+  </div>
 </template>
 
 <template name="participation">
   <div class="participation" data-participation-id={{_id}}>
     {{name}}: <strong>{{points}}</strong>
-    {{#if currentUser}}
-      <p>
-        Vote:
-        <div class="btn-group">
-        {{#each fibonacci}}
-          <button class="btn btn-default" data-points={{this}}>{{this}}</button>
-        {{/each}}
-        </div>
-        <button class="btn btn-warning" id="leave">Leave</button>
-      </p>
-    {{/if}}
   </div>
 </template>
