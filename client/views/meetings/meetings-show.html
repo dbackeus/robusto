@@ -1,3 +1,22 @@
 <template name="meetingsShow">
   <h2>{{title}}</h2>
+  {{asdf}}
+  {{#each participations}}
+    {{> participation}}
+  {{/each}}
+</template>
+
+<template name="participation">
+  <div class="participation" data-participation-id={{_id}}>
+    {{name}}: <strong>{{points}}</strong>
+    {{#if currentUser}}
+      <p>
+        Vote:
+
+        {{#each fibonacci}}
+          <a href="#" data-points={{this}}>{{this}}</a>
+        {{/each}}
+      </p>
+    {{/if}}
+  </div>
 </template>

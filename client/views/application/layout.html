@@ -1,4 +1,12 @@
 <template name="layout">
+  <nav class="navbar navbar-default">
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="{{pathFor 'meetingsIndex'}}">Meetings</a>
+      </li>
+      {{> loginButtons}}
+    </ul>
+  </nav>
   <div class="container">
     <div id="main" class="row-fluid">
       {{> yield}}
