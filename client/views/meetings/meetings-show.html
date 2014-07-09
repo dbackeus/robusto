@@ -18,7 +18,7 @@
       {{/if}}
     {{/if}}
 
-    <div style="margin-top: 40px; margin-bottom: 40px;">
+    <div class="participations">
       {{#each participations}}
         {{> participation}}
       {{/each}}
@@ -27,7 +27,7 @@
 </template>
 
 <template name="participation">
-  <div class="participation col-md-2 col-xs-6">
+  <div class="participation col-lg-2 col-md-2 col-sm-4 col-xs-6">
     <p>{{name}}</p>
     <div class="flip-container">
       <div class="card flipper {{flipped}}">
@@ -35,6 +35,7 @@
           <strong>{{points}}</strong>
         </div>
         <div class="back">
+          <img src="{{avatar}}" class="img-circle avatar">
         </div>
       </div>
     </div>

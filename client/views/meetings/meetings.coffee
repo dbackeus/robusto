@@ -23,24 +23,12 @@ Template.meetingsShow.helpers
   fibonacci: ->
     [0,1,2,3,5,8,13,"?"]
 
-  flipped: ->
-    console.log("flipped")
-    participations = Participations.find({meeting_id: @_id}).fetch()
-
-    if _.all(participations, (participation) -> participation.points?)
-      ""
-    else
-      "flipped"
-
   pointActiveClass: (number) ->
     participation = Participations.findOne({meeting_id: @_id, user_id: Meteor.userId()})
     if participation? && participation.points == number
       "active"
     else
       ""
-
-  loggedIn: ->
-    Meteor.userId()
 
 Template.meetingsShow.events
   "click #join": (e) ->
@@ -76,3 +64,7 @@ Template.participation.helpers
       "Voted"
     else
       "Pending"
+
+  avatar: ->
+    user = Meteor.users.findOne(@user_id)
+    user.services.google.picture
