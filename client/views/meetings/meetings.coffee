@@ -23,13 +23,6 @@ Template.meetingsShow.helpers
   fibonacci: ->
     [0,1,2,3,5,8,13,"?"]
 
-  pointActiveClass: (number) ->
-    participation = Participations.findOne({meeting_id: @_id, user_id: Meteor.userId()})
-    if participation? && participation.points == number
-      "active"
-    else
-      ""
-
 Template.meetingsShow.events
   "click #join": (e) ->
     Participations.insert({meeting_id: @_id, user_id: Meteor.userId()})
