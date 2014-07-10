@@ -3,13 +3,6 @@ Template.meetingsIndex.helpers
     Meetings.find()
 
 Template.meetingsIndex.events
-  "submit form": (e) ->
-    e.preventDefault()
-    title = $("[name=meeting-title]").val()
-    return alert("title plz!") if title.length == 0
-    Meetings.insert title: title
-    $("#meeting-title").val("")
-
   "click .delete-meeting": (e) ->
     Meteor.call "meetingsDelete", @_id
 

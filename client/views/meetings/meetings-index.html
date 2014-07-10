@@ -10,12 +10,6 @@
   </ul>
   {{#if currentUser}}
     <h2>New Meeting</h2>
-    <form class="form-inline">
-      <div class="form-group">
-        <label for="meeting-title">Title:</label>
-        <input id="meeting-title" name="meeting-title" class="form-control" type="text">
-      </div>
-      <button id="create" class="btn btn-primary">Create</button>
-    </form>
+    {{> quickForm collection="Meetings" id="createMeeting" type="insert" class="form-inline"}}
   {{/if}}
 </template>

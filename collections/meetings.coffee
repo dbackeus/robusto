@@ -1,6 +1,9 @@
 root = global ? window
 
-root.Meetings = new Meteor.Collection("meetings")
+root.Meetings = new Meteor.Collection "meetings",
+  schema: new SimpleSchema
+    title:
+      type: String
 
 Meteor.methods
   meetingsDelete: (id) ->
