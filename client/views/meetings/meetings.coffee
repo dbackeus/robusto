@@ -11,7 +11,7 @@ Template.meetingsIndex.events
     $("#meeting-title").val("")
 
   "click .delete-meeting": (e) ->
-    Meetings.remove @_id
+    Meteor.call "meetingsDelete", @_id
 
 Template.meetingsShow.helpers
   participations: ->
